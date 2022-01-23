@@ -48,8 +48,9 @@
 
 #include <netcon.h>
 
+// Change: Disable FAKE DEFAULT ROUTE
 // Create a fake unused default route to force detection of network type on networks without gateways
-#define ZT_WINDOWS_CREATE_FAKE_DEFAULT_ROUTE
+// #define ZT_WINDOWS_CREATE_FAKE_DEFAULT_ROUTE
 
 // Function signatures of dynamically loaded functions, from newdev.h, setupapi.h, and cfgmgr32.h
 typedef BOOL (WINAPI *UpdateDriverForPlugAndPlayDevicesA_t)(_In_opt_ HWND hwndParent,_In_ LPCSTR HardwareId,_In_ LPCSTR FullInfPath,_In_ DWORD InstallFlags,_Out_opt_ PBOOL bRebootRequired);

@@ -2,7 +2,9 @@ FROM centos:6
 
 ARG go_pkg_url
 
-RUN yum update -y
+RUN curl -s -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-6.repo \
+  && sed -i 's/centos\/$releasever/centos-vault\/6.10/g' /etc/yum.repos.d/CentOS-Base.repo \
+  && yum clean all && yum -y update
 RUN yum install -y curl git wget openssh-server sudo make rpmdevtools && yum clean all
 
 RUN curl -s $go_pkg_url -o go.tar.gz && \

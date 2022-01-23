@@ -2,7 +2,8 @@ FROM kalilinux/kali-rolling:latest
 
 ARG go_pkg_url
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install build-essential curl ca-certificates devscripts dh-systemd cmake
+
+RUN apt-get update && apt-get upgrade -y && apt-get -y install build-essential curl ca-certificates devscripts debhelper cmake
 
 RUN curl -s -k $go_pkg_url -o go.tar.gz && \
     tar -C /usr/local -xzf go.tar.gz && \
