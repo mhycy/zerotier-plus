@@ -53,7 +53,7 @@ def buildStaticBinaries() {
                 def runtime = docker.image("ztbuild/${distro}-${platform}:latest")
                 runtime.inside {
                     dir("build") {
-                        sh 'make -j`nproc` ZT_STATIC=1 all'
+                        sh 'make -j8 ZT_STATIC=1 all'
                         sh "file ./zerotier-one"
                         sh "mv zerotier-one zerotier-one-static-${platform}"
                         stash includes: 'zerotier-one-static-*', name: "static-${platform}"
@@ -96,7 +96,7 @@ def packageStatic() {
                     dir("build") {
                         unstash "static-${arch}"
                         sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one" 
-                        sh "make -j`nproc` redhat"
+                        sh "make redhat"
                         sh "mkdir -p ${distro}"
                         sh "cp -av `find ~/rpmbuild/ -type f -name \"*.rpm\"` ${distro}/"
                         archiveArtifacts artifacts: "${distro}/*.rpm", onlyIfSuccessful: true
@@ -121,7 +121,7 @@ def packageStatic() {
                     dir("build") {
                         unstash "static-${arch}"
                         sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one" 
-                        sh "make -j`nproc` redhat"
+                        sh "make redhat"
                         sh "mkdir -p ${distro}"
                         sh "cp -av `find ~/rpmbuild/ -type f -name \"*.rpm\"` ${distro}/"
                         archiveArtifacts artifacts: "${distro}/*.rpm", onlyIfSuccessful: true
@@ -147,7 +147,7 @@ def packageStatic() {
                         dir("build/") {
                             unstash "static-${arch}"
                             sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one" 
-                            sh "make -j`nproc` redhat"
+                            sh "make redhat"
                             sh "mkdir -p ${distro}"
                             sh "cp -av `find ~/rpmbuild/ -type f -name \"*.rpm\"` ${distro}/"
                             archiveArtifacts artifacts: "${distro}/*.rpm", onlyIfSuccessful: true
@@ -182,7 +182,7 @@ def packageStatic() {
                         sh "pwd"
                         sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one && file ./zerotier-one" 
                         sh "mv -f debian/rules.static debian/rules"
-                        sh "make -j`nproc` debian"
+                        sh "make debian"
                     }
                     sh "mkdir -p ${distro}"
                     sh "mv *.deb ${distro}"
@@ -216,7 +216,7 @@ def packageStatic() {
                         sh "pwd"
                         sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one && file ./zerotier-one" 
                         sh "mv -f debian/rules.static debian/rules"
-                        sh "make -j`nproc` debian"
+                        sh "make debian"
                     }
                     sh "mkdir -p ${distro}"
                     sh "mv *.deb ${distro}"
@@ -248,7 +248,7 @@ def packageStatic() {
                         sh "mv zerotier-one-static-${arch} zerotier-one && chmod +x zerotier-one && file ./zerotier-one" 
                         sh "mv -f debian/rules.wheezy.static debian/rules"
                         sh "mv -f debian/control.wheezy debian/control"
-                        sh "make -j`nproc` debian"
+                        sh "make debian"
                     }
                     sh "mkdir -p ${distro}"
                     sh "mv *.deb ${distro}"
@@ -282,7 +282,7 @@ def buildDebianNative() {
                 def runtime = docker.image("ztbuild/${distro}-${arch}:latest")
                 runtime.inside {
                     dir("build") {
-                        sh 'make -j`nproc` debian'
+                        sh 'make debian'
                     }
                     sh "mkdir -p ${distro}"
                     sh "mv *.deb ${distro}"
@@ -334,7 +334,8 @@ def buildCentosNative() {
                 def runtime = docker.image("ztbuild/${distro}-${arch}:latest")
                 runtime.inside {
                     dir("build") {
-                        sh 'make -j`nproc` redhat'
+                        sh 'make -j4'
+                        sh 'make redhat'
                         sh "mkdir -p ${distro}"
                         sh "cp -av `find ~/rpmbuild/ -type f -name \"*.rpm\"` ${distro}/"
                         archiveArtifacts artifacts: "${distro}/*.rpm", onlyIfSuccessful: true
