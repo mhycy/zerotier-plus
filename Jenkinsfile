@@ -45,7 +45,7 @@ def buildStaticBinaries() {
 
     tasks << getTasks(dist, archs, { distro, platform -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -87,7 +87,7 @@ def packageStatic() {
     def centos6Arch = ["i386", "amd64"]
     tasks << getTasks(centos6, centos6Arch, { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -112,7 +112,7 @@ def packageStatic() {
     def centos7Arch = ["i386"]
     tasks << getTasks(centos7, centos7Arch, { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -138,7 +138,7 @@ def packageStatic() {
         def clefos7Arch = ["s390x"]
         tasks << getTasks(clefos7, clefos7Arch, { distro, arch -> 
             def myNode = {
-                node ('linux-build') {
+                node ('built-in') {
                     dir ("build") {
                         checkout scm
                     }
@@ -169,7 +169,7 @@ def packageStatic() {
     }
     tasks << getTasks(debianJessie, debianJessieArch, { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -203,7 +203,7 @@ def packageStatic() {
     }
     tasks << getTasks(ubuntuTrusty, ubuntuTrustyArch, { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -237,7 +237,7 @@ def packageStatic() {
     }
     tasks << getTasks(debianJessie, debianJessieArch, { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -275,7 +275,7 @@ def buildDebianNative() {
     
     def build = { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
@@ -327,7 +327,7 @@ def buildCentosNative() {
     
     def build = { distro, arch -> 
         def myNode = {
-            node ('linux-build') {
+            node ('built-in') {
                 dir ("build") {
                     checkout scm
                 }
